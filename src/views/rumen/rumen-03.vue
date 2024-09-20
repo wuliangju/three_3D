@@ -1,13 +1,11 @@
 <template>
-  <div id="content">
+  <div>
     <div class="container" ref="container"></div>
   </div>
 </template>
 <script>
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-// 引入性能检测插件
-import Stats from 'three/examples/jsm/libs/stats.module'
 export default {
   mounted() {
     const scene = new THREE.Scene()
@@ -16,24 +14,24 @@ export default {
 
     // 创建几何体
     const geometry = new THREE.BoxGeometry(100, 100, 100)
-    const material = new THREE.MeshLambertMaterial({ color: 0x00ffff })
-    const mesh = new THREE.Mesh(geometry, material)
-    scene.add(mesh)
-
-    // 添加辅助线
-    const axesHelper = new THREE.AxesHelper(100)
-    scene.add(axesHelper)
+    const material = new THREE.MeshBasicMaterial({ 
+      color: 0x00ffff,
+      transparent: true,
+      opacity: 0.5
+     })
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        const mesh = new THREE.Mesh(geometry, material)
+          mesh.position.set(i * 100, 0,  j * 100)
+          scene.add(mesh)
+      }
+    }
 
     // 创建相机
     const camera = new THREE.PerspectiveCamera(100, width/height, 0.1, 2000)
-    camera.position.set(100, 100, 100)
+    camera.position.set(1000, 1000, 0)
     camera.lookAt(0, 0, 0)
     scene.add(camera)
-
-    // 创建光源
-    const pointLight = new THREE.PointLight(0xffffff, 1.0)
-    pointLight.position.set(100, 200, 100)
-    scene.add(pointLight)
 
     // 创建渲染器
     const renderer = new THREE.WebGLRenderer()
@@ -47,33 +45,13 @@ export default {
       renderer.render(scene, camera)
     })
 
-    // 检测性能
-    const stats = new Stats()
-    document.getElementById('content').appendChild(stats.dom)
-    // 添加旋转动画
-    const animate = () => {
-      stats.update()
-      mesh.rotateZ(0.01)
-      renderer.render(scene, camera)
-      requestAnimationFrame(animate)
-    }
-    animate()
-
     // 监听窗口变化
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight
       camera.updateProjectionMatrix()
       renderer.setSize(window.innerWidth, window.innerHeight)
     })
-  },
-  data() {
-    return {
-
-    }
-  },
-  methods: {
-
-  },
+  }
 }
 </script>
 <style scoped>

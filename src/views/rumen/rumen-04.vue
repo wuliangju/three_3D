@@ -1,39 +1,40 @@
 <template>
-  <div id="content">
+  <div>
     <div class="container" ref="container"></div>
   </div>
 </template>
 <script>
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-// 引入性能检测插件
-import Stats from 'three/examples/jsm/libs/stats.module'
 export default {
   mounted() {
     const scene = new THREE.Scene()
     const width = this.$refs.container.clientWidth
     const height = this.$refs.container.clientHeight
 
-    // 创建几何体
-    const geometry = new THREE.BoxGeometry(100, 100, 100)
+    // 创建几何体 
+    // const geometry = new THREE.BoxGeometry(100, 100, 100) // 正方体&长方体
+    // const geometry = new THREE.CylinderGeometry(50, 50, 100, 32)  // 圆柱体
+    // const geometry = new THREE.ConeGeometry(50, 100, 32)  // 圆锥体
+    // const geometry = new THREE.SphereGeometry(50, 32, 32) // 球体
+    // const geometry = new THREE.TorusGeometry(50, 20, 32, 32)  // 圆环体
+    // const geometry = new THREE.TorusKnotGeometry(50, 10, 32, 32)  // 圆环形纽结体
+    // const geometry = new THREE.PlaneGeometry(100, 100)  // 平面
+    const geometry = new THREE.CircleGeometry(50, 32)
     const material = new THREE.MeshLambertMaterial({ color: 0x00ffff })
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
-    // 添加辅助线
-    const axesHelper = new THREE.AxesHelper(100)
-    scene.add(axesHelper)
-
-    // 创建相机
-    const camera = new THREE.PerspectiveCamera(100, width/height, 0.1, 2000)
-    camera.position.set(100, 100, 100)
-    camera.lookAt(0, 0, 0)
-    scene.add(camera)
-
     // 创建光源
     const pointLight = new THREE.PointLight(0xffffff, 1.0)
-    pointLight.position.set(100, 200, 100)
+    pointLight.position.set(400, 200, 300)
     scene.add(pointLight)
+
+    // 创建相机
+    const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000)
+    camera.position.set(500, 0, 200)
+    camera.lookAt(mesh.position)
+    scene.add(camera)
 
     // 创建渲染器
     const renderer = new THREE.WebGLRenderer()
@@ -41,45 +42,28 @@ export default {
     this.$refs.container.appendChild(renderer.domElement)
     renderer.render(scene, camera)
 
-    // 添加相控件
+    // 创建相机拖动控制器
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.addEventListener('change', () => {
       renderer.render(scene, camera)
     })
 
-    // 检测性能
-    const stats = new Stats()
-    document.getElementById('content').appendChild(stats.dom)
-    // 添加旋转动画
+    // 动画循环
     const animate = () => {
-      stats.update()
-      mesh.rotateZ(0.01)
+      mesh.rotateX(0.01)
+      // mesh.rotateY(0.1)
+      // mesh.rotateZ(0.1)
       renderer.render(scene, camera)
+      controls.update()
       requestAnimationFrame(animate)
     }
     animate()
-
-    // 监听窗口变化
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
-    })
-  },
-  data() {
-    return {
-
-    }
-  },
-  methods: {
-
-  },
+  }
 }
 </script>
 <style scoped>
 .container {
   width: 100%;
-  height: 100vh; /* 设置高度为视口高度 */
-  background-color: #fff;
+  height: 100vh;
 }
 </style>
