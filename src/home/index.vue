@@ -79,7 +79,79 @@ export default {
               key: '/example2',
               path: '/example2',
             },
+            {
+              title: '点模型',
+              key: '/example3',
+              path: '/example3',
+            },
+            {
+              title: '线模型',
+              key: '/example4',
+              path: '/example4',
+            },
+            {
+              title: '三角形（面）',
+              key: '/example5',
+              path: '/example5',
+            },
+            {
+              title: '组对象', 
+              key: '/example6',
+              path: '/example6',
+            },
+            {
+              title: '纹理贴图',
+              key: '/example7',
+              path: '/example7',
+            },
+            {
+              title: '地板示例',
+              key: '/example8',
+              path: '/example8',
+            },
+            {
+              title: 'UV贴图动画',
+              key: '/example9',
+              path: '/example9',
+            },
+            {
+              title: '复习',
+              key: '/example10',
+              path: '/example10',
+            }
           ],
+        },
+        {
+          title: '模型',
+          key: '/school',
+          path: '/school',
+          children: [
+            {
+              title: '工厂',
+              key: '/school-01',
+              path: '/school-01',
+            },
+            {
+              title: '简易小区',
+              key: '/school-02',
+              path: '/school-02',
+            },
+            {
+              title: '金属',
+              key: '/school-03',
+              path: '/school-03',
+            },
+            {
+              title: '车模',
+              key: '/school-04',
+              path: '/school-04',
+            },
+            {
+              title: '学校',
+              key: '/school-05',
+              path: '/school-05',
+            },
+          ]
         }
         // 你可以继续添加更多的菜单项
       ],

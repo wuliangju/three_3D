@@ -32,6 +32,58 @@ const routes = [
     path: '/example2',
     component: () => import('@/views/demo/demo-02.vue'),
   },
+  {
+    path: '/example3',
+    component: () => import('@/views/demo/demo-03.vue'),
+  },
+  {
+    path: '/example4',
+    component: () => import('@/views/demo/demo-04.vue'),
+  },
+  {
+    path: '/example5',
+    component: () => import('@/views/demo/demo-05.vue'),
+  },
+  {
+    path: '/example6',
+    component: () => import('@/views/demo/demo-06.vue'),
+  },
+  {
+    path: '/example7',
+    component: () => import('@/views/demo/demo-07.vue'),
+  },
+  {
+    path: '/example8',
+    component: () => import('@/views/demo/demo-08.vue'),
+  },
+  {
+    path: '/example9',
+    component: () => import('@/views/demo/demo-09.vue'),
+  },
+  {
+    path: '/example10',
+    component: () => import('@/views/demo/demo-10.vue'),
+  },
+  {
+    path: '/school-01',
+    component: () => import('@/views/school/school-01.vue'),
+  },
+  {
+    path: '/school-02',
+    component: () => import('@/views/school/school-02.vue'),
+  },
+  {
+    path: '/school-03',
+    component: () => import('@/views/school/school-03.vue'),
+  },
+  {
+    path: '/school-04',
+    component: () => import('@/views/school/school-04.vue'),
+  },
+  {
+    path: '/school-05',
+    component: () => import('@/views/school/school-05.vue'),
+  }
 ];
 
 const router = new VueRouter({
